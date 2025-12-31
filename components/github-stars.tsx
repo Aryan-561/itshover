@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { getGithubStars } from "@/lib/stars";
 import CountUp from "./count-up";
+import { LINKS } from "@/constants";
 
 const GithubStars = () => {
   const [stars, setStars] = useState<number | null>(null);
@@ -20,7 +21,10 @@ const GithubStars = () => {
   }, []);
 
   return (
-    <div className="border-border bg-background hover:bg-accent hover:text-accent-foreground flex w-fit items-center gap-2 rounded-full border px-4 py-2 shadow-sm transition-colors duration-300">
+    <button
+      onClick={() => window.open(LINKS.GITHUB, "_blank")}
+      className="border-border bg-background hover:bg-accent hover:text-accent-foreground flex w-fit items-center gap-2 rounded-full border px-4 py-2 shadow-sm transition-colors duration-300"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -40,7 +44,7 @@ const GithubStars = () => {
           className="count-up-text"
         />
       </span>
-    </div>
+    </button>
   );
 };
 

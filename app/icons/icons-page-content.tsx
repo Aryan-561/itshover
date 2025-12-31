@@ -20,6 +20,7 @@ const HeroSection = () => {
           ease: "easeInOut",
         }}
       />
+
       <motion.div
         className="from-primary/15 pointer-events-none absolute -right-32 -bottom-32 h-96 w-96 rounded-full bg-linear-to-tl to-transparent blur-3xl"
         animate={{
@@ -32,13 +33,14 @@ const HeroSection = () => {
           ease: "easeInOut",
         }}
       />
+
       <motion.div
         className="relative w-full py-20 md:py-28"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="px-4 sm:mr-20 sm:ml-20 sm:px-0">
+        <div className="px-4 sm:mx-20 sm:px-0">
           <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <div className="flex w-full flex-col items-start text-left">
               <motion.h1
@@ -54,7 +56,7 @@ const HeroSection = () => {
               </motion.h1>
 
               <motion.p
-                className="text-muted-foreground mb-6 max-w-xl text-lg leading-relaxed lowercase"
+                className="text-muted-foreground mb-4 max-w-xl text-lg leading-relaxed lowercase"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
@@ -62,6 +64,25 @@ const HeroSection = () => {
                 A collection of smooth, high-quality animated icons for your
                 next project. Copy and paste directly into your app.
               </motion.p>
+
+              <motion.span
+                className="text-muted-foreground mb-6 text-sm lowercase"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.25, ease: "easeOut" }}
+              >
+                works seamlessly with{" "}
+                <Link
+                  href="https://ui.shadcn.com/"
+                  target="_blank"
+                  className="group inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium transition-all duration-200"
+                >
+                  <span className="from-primary to-primary/70 bg-linear-to-r bg-clip-text text-transparent">
+                    shadcn
+                  </span>
+                </Link>
+                via cli
+              </motion.span>
 
               <motion.div
                 className="flex items-center gap-3 lowercase"
@@ -72,6 +93,7 @@ const HeroSection = () => {
                 <span className="text-muted-foreground text-sm">
                   Crafted with care and
                 </span>
+
                 <Link
                   href="https://motion.dev/"
                   target="_blank"

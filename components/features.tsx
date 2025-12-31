@@ -137,11 +137,11 @@ const FeatureCard = ({ component }: FeatureCardProps) => {
     <motion.div
       whileHover={{ y: -2 }}
       transition={{ duration: 0.25, ease: "easeOut" }}
-      className="group border-border bg-card relative flex h-[400px] cursor-pointer flex-col overflow-hidden rounded-2xl border"
+      className="group border-border bg-card relative flex h-[400px] flex-col overflow-hidden rounded-2xl border"
     >
       {/* glow */}
       <div className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="from-primary/10 absolute inset-0 bg-gradient-to-br via-transparent to-transparent" />
+        <div className="from-primary/10 absolute inset-0 bg-linear-to-br via-transparent to-transparent" />
       </div>
 
       {/* image with text overlay */}

@@ -85,7 +85,7 @@ const IconList = () => {
 
   return (
     <motion.div
-      className="w-full"
+      className="mb-4 w-full"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}

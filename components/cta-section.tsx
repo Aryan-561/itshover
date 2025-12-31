@@ -5,6 +5,7 @@ import PrimaryButton from "@/components/ui/primary-button";
 import SecondaryButton from "@/components/ui/secondary-button";
 import { motion } from "motion/react";
 import ArrowNarrowRightIcon from "@/icons/arrow-narrow-right-icon";
+import { LINKS } from "@/constants";
 
 const CTASection = () => {
   return (
@@ -16,12 +17,12 @@ const CTASection = () => {
       className="flex flex-col items-center justify-center py-20 text-center md:py-32"
     >
       <div className="max-w-4xl space-y-6">
-        <h2 className="text-3xl font-bold tracking-tight lowercase sm:text-4xl md:text-5xl">
-          Ready to add motion to your app?
+        <h2 className="text-2xl font-bold tracking-tight lowercase sm:text-3xl md:text-4xl">
+          Ready to Bring your icons to life?
         </h2>
-        <p className="text-muted-foreground mx-auto max-w-2xl text-lg lowercase sm:text-xl">
-          Browse our collection of animated icons and start building beautiful,
-          interactive interfaces today.
+        <p className="text-muted-foreground text-md mx-auto max-w-xl lowercase sm:text-lg">
+          A growing open source library of animated icons built for real
+          interfaces.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Link href="/icons">
@@ -30,11 +31,12 @@ const CTASection = () => {
               <ArrowNarrowRightIcon />
             </PrimaryButton>
           </Link>
-          <Link href="" target="_blank">
-            <SecondaryButton className="lowercase">
-              Star on GitHub
-            </SecondaryButton>
-          </Link>
+          <SecondaryButton
+            className="lowercase"
+            onClick={() => window.open(LINKS.GITHUB, "_blank")}
+          >
+            Star on GitHub
+          </SecondaryButton>
         </div>
       </div>
     </motion.section>
