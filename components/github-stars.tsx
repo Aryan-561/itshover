@@ -1,24 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getGithubStars } from "@/lib/stars";
+import { useGithubStars } from "./github-stars-context";
 import CountUp from "./count-up";
 import { LINKS } from "@/constants";
 
 const GithubStars = () => {
-  const [stars, setStars] = useState<number | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    getGithubStars().then((count) => {
-      if (mounted) setStars(count);
-    });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const { stars } = useGithubStars();
 
   return (
     <button
@@ -37,7 +24,7 @@ const GithubStars = () => {
       <span className="text-muted-foreground text-sm font-medium">
         <CountUp
           from={0}
-          to={stars || 0}
+          to={stars ?? 0}
           separator=","
           direction="up"
           duration={1}

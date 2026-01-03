@@ -9,6 +9,8 @@ import { CommandMenuProvider } from "@/components/command-menu-context";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LINKS } from "@/constants";
 import { Analytics } from "@vercel/analytics/react";
+// import { StickyBanner } from "@/components/ui/sticky-banner";
+import { GithubStarsProvider } from "@/components/github-stars-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,14 +61,20 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <CommandMenuProvider>
-            <TooltipProvider>
-              <CommandMenu />
-              <Navbar />
-              {children}
-              <Footer />
-            </TooltipProvider>
-          </CommandMenuProvider>
+          <GithubStarsProvider>
+            <CommandMenuProvider>
+              <TooltipProvider>
+                <CommandMenu />
+                {/* <StickyBanner className="bg-primary text-primary-foreground h-8">
+                  <p>Something Coming Soon</p>
+                </StickyBanner> */}
+                <Navbar />
+
+                {children}
+                <Footer />
+              </TooltipProvider>
+            </CommandMenuProvider>
+          </GithubStarsProvider>
         </ThemeProvider>
         <Analytics />
       </body>

@@ -1,19 +1,29 @@
-export async function getGithubStars() {
+const GITHUB_API = "https://api.github.com/repos/itshover/itshover";
+const CACHE_DURATION = 3600; // 1 hour in seconds
+
+export async function getGithubStars(): Promise<number> {
   try {
-    // Use GitHub API endpoint instead of web URL
-    const resp = await fetch("https://api.github.com/repos/itshover/itshover", {
-      next: { revalidate: 3600 },
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+    const resp = await fetch(GITHUB_API, {
+      headers: {
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "itshover-website",
+      },
+      next: { revalidate: CACHE_DURATION },
+      signal: controller.signal,
     });
 
+    clearTimeout(timeoutId);
+
     if (!resp.ok) {
-      console.error("Failed to fetch GitHub stars:", resp.status);
       return 0;
     }
 
     const data = await resp.json();
-    return data.stargazers_count || 0;
-  } catch (error) {
-    console.error("Error fetching GitHub stars:", error);
+    return data.stargazers_count ?? 0;
+  } catch {
     return 0;
   }
 }
