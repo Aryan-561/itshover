@@ -1,0 +1,93 @@
+"use client";
+
+import React, { useState } from "react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
+import CopyIcon from "@/icons/copy-icon";
+import SimpleCheckedIcon from "@/icons/simple-checked-icon";
+
+export interface Example {
+  componentName: string;
+  slug?: string;
+  createdBy?: string; // github profile link
+  description?: string;
+  tags?: string[];
+  code: string;
+
+  component: React.ComponentType<{ isAnimated?: boolean }>;
+}
+
+const CodeViewer = ({ code }: { code: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="relative max-h-[400px] w-full overflow-auto rounded-md bg-zinc-950 p-4 text-sm text-zinc-50">
+      <button
+        onClick={copyToClipboard}
+        className="absolute top-4 right-4 z-10 rounded-md bg-zinc-900/50 p-1 text-zinc-400 backdrop-blur-sm transition-colors hover:text-white"
+      >
+        {copied ? (
+          <SimpleCheckedIcon className="text-green-500" />
+        ) : (
+          <CopyIcon />
+        )}
+      </button>
+      <pre className="font-mono text-xs">
+        <code>{code}</code>
+      </pre>
+    </div>
+  );
+};
+
+export const ExampleDetail = ({ example }: { example: Example }) => {
+  const [isAnimated, setIsAnimated] = useState(true);
+
+  return (
+    <div className="w-full overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 shadow-sm backdrop-blur-xl">
+      <Tabs defaultValue="preview" className="flex w-full flex-col">
+        <div className="flex items-center justify-between border-b border-zinc-800 bg-zinc-900/50 px-6 py-3">
+          <TabsList className="bg-zinc-800">
+            <TabsTrigger value="preview">Preview</TabsTrigger>
+            <TabsTrigger value="code">Code</TabsTrigger>
+          </TabsList>
+
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-zinc-400">Animation</span>
+            <button
+              onClick={() => setIsAnimated(!isAnimated)}
+              className={cn(
+                "relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none",
+                isAnimated ? "bg-indigo-600" : "bg-zinc-700",
+              )}
+            >
+              <span
+                className={cn(
+                  "inline-block h-3 w-3 transform rounded-full bg-white transition-transform",
+                  isAnimated ? "translate-x-5" : "translate-x-1",
+                )}
+              />
+            </button>
+          </div>
+        </div>
+
+        <TabsContent value="preview" className="mt-0 flex-1 p-0">
+          <div className="flex h-full min-h-[500px] w-full overflow-x-auto bg-zinc-950/50 p-8">
+            <div className="m-auto">
+              {/* Pass isAnimated prop if the component handles it, otherwise it just renders */}
+              <example.component isAnimated={isAnimated} />
+            </div>
+          </div>
+        </TabsContent>
+        <TabsContent value="code" className="mt-0 flex-1 p-0">
+          <CodeViewer code={example.code} />
+        </TabsContent>
+      </Tabs>
+    </div>
+  );
+};
