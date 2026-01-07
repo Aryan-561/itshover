@@ -1,6 +1,6 @@
 "use client";
 import { forwardRef, useImperativeHandle, useEffect } from "react";
-import { AnimatedIconHandle, AnimatedIconProps } from "./types";
+import type { AnimatedIconHandle, AnimatedIconProps } from "./types";
 import { motion, useAnimate } from "motion/react";
 
 const BatteryChargingIcon = forwardRef<AnimatedIconHandle, AnimatedIconProps>(
