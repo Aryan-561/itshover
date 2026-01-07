@@ -153,7 +153,7 @@ Create a new file in `icons/` directory. Follow the exact same pattern as existi
 
 ```tsx
 import { forwardRef, useImperativeHandle } from "react";
-import { AnimatedIconHandle, AnimatedIconProps } from "./types";
+import type { AnimatedIconHandle, AnimatedIconProps } from "./types";
 import { motion, useAnimate } from "motion/react";
 
 const YourIcon = forwardRef<AnimatedIconHandle, AnimatedIconProps>(
