@@ -1,6 +1,6 @@
 import XSidebar from "@/components/examples/x-sidebar";
 import AnimatedNavbar from "@/components/examples/animated-navbar";
-import CollapsibleSidebar from "@/components/examples/collapsible-sidebar"
+import CollapsibleSidebar from "@/components/examples/collapsible-sidebar";
 import fs from "fs";
 import path from "path";
 
@@ -25,7 +25,13 @@ const EXAMPLE_REGISTRY = [
     component: AnimatedNavbar,
     description:
       "A responsive top navigation bar with a sliding active indicator and hover-triggered icon animations. Collapses to icons on mobile.",
-    tags: ["Navbar", "Navigation", "Responsive", "Framer Motion", "Micro-interactions"],
+    tags: [
+      "Navbar",
+      "Navigation",
+      "Responsive",
+      "Framer Motion",
+      "Micro-interactions",
+    ],
   },
   {
     componentName: "Collapsible Sidebar",

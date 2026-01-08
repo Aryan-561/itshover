@@ -243,9 +243,7 @@ export default function IconDetailContent({
                       <div className="max-h-[500px] overflow-auto">
                         {code ? (
                           <pre className="p-4 text-sm">
-                            <code className="text-foreground/90">
-                              {code}
-                            </code>
+                            <code className="text-foreground/90">{code}</code>
                           </pre>
                         ) : (
                           <div className="flex h-40 items-center justify-center">

@@ -24,16 +24,19 @@ interface AnimatedNavbarProps {
   isAnimated?: boolean;
 }
 
-const AnimatedNavbar = ({ className, isAnimated = true }: AnimatedNavbarProps) => {
+const AnimatedNavbar = ({
+  className,
+  isAnimated = true,
+}: AnimatedNavbarProps) => {
   const [activeTab, setActiveTab] = useState("Home");
 
   return (
     <div className={cn("flex w-full justify-center p-4", className)}>
-      <nav className="relative flex w-full max-w-2xl items-center justify-between rounded-full bg-white/10 p-2 shadow-lg backdrop-blur-md border border-white/20 dark:bg-neutral-900/50 dark:border-white/10 sm:justify-center sm:gap-2">
+      <nav className="relative flex w-full max-w-2xl items-center justify-between rounded-full border border-white/20 bg-white/10 p-2 shadow-lg backdrop-blur-md sm:justify-center sm:gap-2 dark:border-white/10 dark:bg-neutral-900/50">
         {navItems.map((item) => (
-          <NavItem 
-            key={item.label} 
-            {...item} 
+          <NavItem
+            key={item.label}
+            {...item}
             isActive={activeTab === item.label}
             onClick={() => setActiveTab(item.label)}
             isAnimated={isAnimated}
@@ -45,7 +48,9 @@ const AnimatedNavbar = ({ className, isAnimated = true }: AnimatedNavbarProps) =
 };
 
 interface NavItemProps {
-  icon: React.ForwardRefExoticComponent<AnimatedIconProps & React.RefAttributes<AnimatedIconHandle>>;
+  icon: React.ForwardRefExoticComponent<
+    AnimatedIconProps & React.RefAttributes<AnimatedIconHandle>
+  >;
   label: string;
   href: string;
   isActive: boolean;
@@ -53,7 +58,14 @@ interface NavItemProps {
   isAnimated: boolean;
 }
 
-const NavItem = ({ icon: Icon, label, href, isActive, onClick, isAnimated }: NavItemProps) => {
+const NavItem = ({
+  icon: Icon,
+  label,
+  href,
+  isActive,
+  onClick,
+  isAnimated,
+}: NavItemProps) => {
   const iconRef = useRef<AnimatedIconHandle>(null);
 
   const handleMouseEnter = () => {
@@ -75,7 +87,7 @@ const NavItem = ({ icon: Icon, label, href, isActive, onClick, isAnimated }: Nav
   }, [isAnimated]);
 
   return (
-    <Link 
+    <Link
       href={href}
       onClick={(e) => {
         e.preventDefault();
@@ -83,7 +95,9 @@ const NavItem = ({ icon: Icon, label, href, isActive, onClick, isAnimated }: Nav
       }}
       className={cn(
         "relative flex flex-1 items-center justify-center rounded-full px-4 py-3 text-sm font-medium transition-colors sm:flex-none",
-        isActive ? "text-neutral-900 dark:text-white" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"
+        isActive
+          ? "text-neutral-900 dark:text-white"
+          : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200",
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
@@ -95,9 +109,9 @@ const NavItem = ({ icon: Icon, label, href, isActive, onClick, isAnimated }: Nav
           transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
         />
       )}
-      
+
       <div className="relative z-10 flex items-center gap-2">
-        <Icon 
+        <Icon
           ref={iconRef}
           className={cn("h-5 w-5", isActive ? "text-current" : "")}
           disableHover={true}

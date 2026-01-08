@@ -9,7 +9,7 @@ import SimpleCheckedIcon from "@/icons/simple-checked-icon";
 export interface Example {
   componentName: string;
   slug?: string;
-  createdBy?: string; 
+  createdBy?: string;
   description?: string;
   tags?: string[];
   code: string;
@@ -53,8 +53,12 @@ export const ExampleDetail = ({ example }: { example: Example }) => {
       <Tabs defaultValue="preview" className="flex w-full flex-col">
         <div className="border-border bg-card/50 flex items-center justify-between border-b px-6 py-3">
           <TabsList className="bg-muted">
-            <TabsTrigger value="preview" className="cursor-pointer">Preview</TabsTrigger>
-            <TabsTrigger value="code" className="cursor-pointer">Code</TabsTrigger>
+            <TabsTrigger value="preview" className="cursor-pointer">
+              Preview
+            </TabsTrigger>
+            <TabsTrigger value="code" className="cursor-pointer">
+              Code
+            </TabsTrigger>
           </TabsList>
 
           <div className="flex items-center gap-2">
@@ -65,7 +69,7 @@ export const ExampleDetail = ({ example }: { example: Example }) => {
               aria-label="Toggle animation"
               onClick={() => setIsAnimated(!isAnimated)}
               className={cn(
-                "relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none cursor-pointer",
+                "relative inline-flex h-5 w-9 cursor-pointer items-center rounded-full transition-colors focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none",
                 isAnimated ? "bg-indigo-600" : "bg-input",
               )}
             >

@@ -32,7 +32,10 @@ interface CollapsibleSidebarProps {
   isAnimated?: boolean;
 }
 
-const CollapsibleSidebar = ({ className, isAnimated = true }: CollapsibleSidebarProps) => {
+const CollapsibleSidebar = ({
+  className,
+  isAnimated = true,
+}: CollapsibleSidebarProps) => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   return (
@@ -41,13 +44,13 @@ const CollapsibleSidebar = ({ className, isAnimated = true }: CollapsibleSidebar
         animate={{ width: isCollapsed ? 80 : 280 }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
         className={cn(
-          "relative flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-2xl",
-          "border-border/50 backdrop-blur-3xl bg-white/80 dark:bg-neutral-900/80"
+          "bg-card relative flex h-full flex-col overflow-hidden rounded-2xl border shadow-2xl",
+          "border-border/50 bg-white/80 backdrop-blur-3xl dark:bg-neutral-900/80",
         )}
       >
         <div className="flex items-center p-4 pt-6">
-          <div className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl  bg-linear-to-tr  shadow-lg hover:bg-muted/50 cursor-pointer">
-             <span className="font-bold text-lg">A</span>
+          <div className="hover:bg-muted/50 relative flex h-10 w-10 shrink-0 cursor-pointer items-center justify-center rounded-xl bg-linear-to-tr shadow-lg">
+            <span className="text-lg font-bold">A</span>
           </div>
           <AnimatePresence>
             {!isCollapsed && (
@@ -57,8 +60,12 @@ const CollapsibleSidebar = ({ className, isAnimated = true }: CollapsibleSidebar
                 exit={{ opacity: 0, x: -10 }}
                 className="ml-3 flex flex-col overflow-hidden"
               >
-                <span className="text-lg font-bold text-foreground truncate">Acme Inc.</span>
-                <span className="text-xs text-muted-foreground truncate">Enterprise Plan</span>
+                <span className="text-foreground truncate text-lg font-bold">
+                  Acme Inc.
+                </span>
+                <span className="text-muted-foreground truncate text-xs">
+                  Enterprise Plan
+                </span>
               </motion.div>
             )}
           </AnimatePresence>
@@ -76,9 +83,9 @@ const CollapsibleSidebar = ({ className, isAnimated = true }: CollapsibleSidebar
         </nav>
 
         <div className="px-3 pb-2">
-           <button
+          <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="group flex w-full items-center justify-center rounded-xl p-2 text-muted-foreground transition-all hover:bg-muted hover:text-foreground"
+            className="group text-muted-foreground hover:bg-muted hover:text-foreground flex w-full items-center justify-center rounded-xl p-2 transition-all"
           >
             <motion.div
               animate={{ rotate: isCollapsed ? 0 : 180 }}
@@ -102,43 +109,52 @@ const CollapsibleSidebar = ({ className, isAnimated = true }: CollapsibleSidebar
           </button>
         </div>
 
-        <div className="border-t border-border/10 p-4">
-             <div className={cn("flex items-center rounded-xl transition-colors hover:bg-muted/50 p-2", isCollapsed ? "justify-center" : "")}>
-                <div className="h-9 w-9 shrink-0 rounded-full bg-neutral-200 dark:bg-neutral-700 overflow-hidden border border-border">
-                   <div className="h-full w-full bg-linear-to-br from-pink-400 to-orange-400" />
-                </div>
-                <AnimatePresence>
-                  {!isCollapsed && (
-                    <motion.div
-                      initial={{ opacity: 0, width: 0 }}
-                      animate={{ opacity: 1, width: "auto" }}
-                      exit={{ opacity: 0, width: 0 }}
-                      className="ml-3 flex flex-col overflow-hidden"
-                    >
-                      <span className="text-sm font-medium text-foreground truncate">John Doe</span>
-                      <span className="text-xs text-muted-foreground truncate">john@acme.com</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-                {!isCollapsed && (
-                   <div className="ml-auto">
-                     <svg
-                       xmlns="http://www.w3.org/2000/svg"
-                       width="16"
-                       height="16"
-                       viewBox="0 0 24 24"
-                       fill="none"
-                       stroke="currentColor"
-                       strokeWidth="2"
-                       strokeLinecap="round"
-                       strokeLinejoin="round"
-                       className="text-muted-foreground"
-                     >
-                       <path d="m6 9 6 6 6-6" />
-                     </svg>
-                   </div>
-                )}
-             </div>
+        <div className="border-border/10 border-t p-4">
+          <div
+            className={cn(
+              "hover:bg-muted/50 flex items-center rounded-xl p-2 transition-colors",
+              isCollapsed ? "justify-center" : "",
+            )}
+          >
+            <div className="border-border h-9 w-9 shrink-0 overflow-hidden rounded-full border bg-neutral-200 dark:bg-neutral-700">
+              <div className="h-full w-full bg-linear-to-br from-pink-400 to-orange-400" />
+            </div>
+            <AnimatePresence>
+              {!isCollapsed && (
+                <motion.div
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  className="ml-3 flex flex-col overflow-hidden"
+                >
+                  <span className="text-foreground truncate text-sm font-medium">
+                    John Doe
+                  </span>
+                  <span className="text-muted-foreground truncate text-xs">
+                    john@acme.com
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+            {!isCollapsed && (
+              <div className="ml-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-muted-foreground"
+                >
+                  <path d="m6 9 6 6 6-6" />
+                </svg>
+              </div>
+            )}
+          </div>
         </div>
       </motion.div>
     </div>
@@ -146,14 +162,22 @@ const CollapsibleSidebar = ({ className, isAnimated = true }: CollapsibleSidebar
 };
 
 interface SidebarItemProps {
-  icon: React.ForwardRefExoticComponent<AnimatedIconProps & React.RefAttributes<AnimatedIconHandle>>;
+  icon: React.ForwardRefExoticComponent<
+    AnimatedIconProps & React.RefAttributes<AnimatedIconHandle>
+  >;
   label: string;
   href: string;
   isCollapsed: boolean;
   isAnimated: boolean;
 }
 
-const SidebarItem = ({ icon: Icon, label, href, isCollapsed, isAnimated }: SidebarItemProps) => {
+const SidebarItem = ({
+  icon: Icon,
+  label,
+  href,
+  isCollapsed,
+  isAnimated,
+}: SidebarItemProps) => {
   const iconRef = useRef<AnimatedIconHandle>(null);
 
   const handleMouseEnter = () => {
@@ -178,15 +202,15 @@ const SidebarItem = ({ icon: Icon, label, href, isCollapsed, isAnimated }: Sideb
     <Link
       href={href}
       className={cn(
-        "group flex items-center rounded-xl p-3 transition-all hover:bg-muted",
-        isCollapsed ? "justify-center" : "gap-4"
+        "group hover:bg-muted flex items-center rounded-xl p-3 transition-all",
+        isCollapsed ? "justify-center" : "gap-4",
       )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
       <Icon
         ref={iconRef}
-        className="h-6 w-6 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors"
+        className="text-muted-foreground group-hover:text-foreground h-6 w-6 shrink-0 transition-colors"
         disableHover={true}
       />
       <AnimatePresence>
@@ -196,7 +220,7 @@ const SidebarItem = ({ icon: Icon, label, href, isCollapsed, isAnimated }: Sideb
             animate={{ opacity: 1, width: "auto" }}
             exit={{ opacity: 0, width: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden whitespace-nowrap text-sm font-medium text-muted-foreground group-hover:text-foreground"
+            className="text-muted-foreground group-hover:text-foreground overflow-hidden text-sm font-medium whitespace-nowrap"
           >
             {label}
           </motion.span>
@@ -210,7 +234,11 @@ const SidebarItem = ({ icon: Icon, label, href, isCollapsed, isAnimated }: Sideb
       <TooltipProvider delayDuration={0}>
         <Tooltip>
           <TooltipTrigger asChild>{content}</TooltipTrigger>
-          <TooltipContent side="right" sideOffset={10} className="bg-popover text-popover-foreground shadow-md border-border/10 rounded-lg px-3 py-1.5 font-medium text-xs">
+          <TooltipContent
+            side="right"
+            sideOffset={10}
+            className="bg-popover text-popover-foreground border-border/10 rounded-lg px-3 py-1.5 text-xs font-medium shadow-md"
+          >
             {label}
           </TooltipContent>
         </Tooltip>
